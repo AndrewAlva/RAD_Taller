@@ -8,6 +8,7 @@ html,
 body
 {
     overflow: hidden;
+    font-size: 10px;
 }
 
 .webgl
@@ -31,3 +32,104 @@ audio{
     top: 20px !important;
     bottom: auto !important;
 }
+
+
+/* POSTER 1 -- Corner initals */
+#poster-1 {
+    z-index: 2;
+    pointer-events: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    /* background-color: rgba(255,0,0, 0.2); */
+    color: #fff;
+    mix-blend-mode: difference;
+}
+
+    #poster-1 .heading, #poster-1 .subheading {
+        position: absolute;
+        left: 0;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 20px 30px;
+        text-align: center;
+        font-size: 1.4em;
+        font-weight: lighter;
+    }
+
+    @media (min-width: 768px) {
+        #poster-1 .heading, #poster-1 .subheading {
+            padding: 50px 80px;
+            font-size: 1.4em;
+        }
+    }
+
+    #poster-1 .heading {
+        top: 0;
+        letter-spacing: 1em;
+    }
+    #poster-1 .subheading {
+        bottom: 50px;
+    }
+    @media (min-width: 768px) {
+        #poster-1 .subheading {
+            bottom: 0;
+            font-size: 1.8em;
+        }
+    }
+
+        #poster-1 .subheading .line {
+            display: block;
+            letter-spacing: .17em;
+        }
+
+
+/* ORNAMENTS */
+/* Corners */
+.corners {
+    position: fixed;
+    pointer-events: none;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+    .corners .c {
+        position: absolute;
+        padding: 20px;
+        font-size: 1.8em;
+        line-height: .8em;
+        font-family: monospace;
+        font-weight: lighter;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: auto;
+        font-smooth: auto;
+    }
+
+    @media (min-width: 768px) {
+        .corners .c {
+            padding: 50px;
+            font-size: 2.8em;
+        }
+    }
+
+        .corners .c.tl {
+            top: 0;
+            left: 0;
+        }
+
+        .corners .c.tr {
+            top: 0;
+            right: 0;
+        }
+
+        .corners .c.bl {
+            bottom: 0;
+            left: 0;
+        }
+
+        .corners .c.br {
+            bottom: 0;
+            right: 0;
+        }

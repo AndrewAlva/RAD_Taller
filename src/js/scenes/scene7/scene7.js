@@ -108,6 +108,7 @@ const generateGalaxy = () => {
 var Scene7 = {
     init: function() {
         var _this = this;
+        _this.isMobile = window.innerWidth < 768 ? true : false;
 
         /**
          * GUI
@@ -128,13 +129,13 @@ var Scene7 = {
 
         // Galaxy params
         _this.controller.galaxy = {
-            count: 357500,
-            size: 65,
-            radius: 6.05,
-            sides: 4,
+            count: window.innerWidth < 768 ? 40000 : 120000,
+            size: window.innerWidth < 768 ? 30 : 78,
+            radius: window.innerWidth < 768 ? 5 : 10,
+            sides: 7,
             randomness: 3,
             randomnessPower: 1,
-            insideColor: '#750000',
+            insideColor: window.innerWidth < 768 ? '#ff0011' : '#750009',
             outsideColor: '#ffffff',
         }
         _this.Debugger.add(_this.controller.galaxy, 'count').min(100).max(1000000).step(100).onFinishChange(generateGalaxy)
@@ -212,6 +213,15 @@ var Scene7 = {
          */
         _this.onResize = function() {
             _this.RT1.setSize(Utils.screenSize.width, Utils.screenSize.height);
+            let checkMobile = window.innerWidth < 768 ? true : false;
+            if (_this.isMobile != checkMobile) {
+                _this.isMobile = checkMobile;
+                _this.controller.galaxy.count = window.innerWidth < 768 ? 40000 : 120000;
+                _this.controller.galaxy.size = window.innerWidth < 768 ? 30 : 78;
+                _this.controller.galaxy.radius = window.innerWidth < 768 ? 5 : 10;
+                _this.controller.galaxy.insideColor = window.innerWidth < 768 ? '#ff0011' : '#750009';
+                generateGalaxy();
+            }
         }
 
 

@@ -68,7 +68,7 @@ window.World = {
             }
         }
         Utils.debugger.toggleCamera();
-        Utils.debugger.toggleCamera(); // toggle to zenit from start
+        // Utils.debugger.toggleCamera(); // toggle to zenit from start
 
         _this.DEBUGGER.add(Utils.debugger, 'toggleCamera');
         // midiEvents.addEventListener('P1_push', Utils.debugger.toggleCamera)

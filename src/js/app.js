@@ -87,7 +87,7 @@ var App = {
             Scene12,
         ]);
 
-        SceneController.activateScene(Scene15);
+        SceneController.activateScene(Scene7);
         window.SC = SceneController;
 
         /**

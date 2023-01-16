@@ -8,6 +8,7 @@ import * as dat from 'dat.gui'
     // dat.GUI.toggleHide();
     Utils.debugger = {};
     Utils.guiHide = dat.GUI.toggleHide;
+    // Utils.gui.destroy(); // Remove dat.GUI entirely without breaking build
 
     
     
