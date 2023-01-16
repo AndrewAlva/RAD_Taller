@@ -7,6 +7,7 @@ import * as dat from 'dat.gui'
     Utils.gui = new dat.GUI();
     // dat.GUI.toggleHide();
     Utils.debugger = {};
+    Utils.guiHide = dat.GUI.toggleHide;
 
     
     

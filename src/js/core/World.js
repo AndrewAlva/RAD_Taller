@@ -17,6 +17,7 @@ window.World = {
     initGUI: function() {
         this.DEBUGGER = Utils.gui.addFolder('Global');
         this.DEBUGGER.open();
+        Utils.guiHide();
     },
 
     initSetup: function() {
@@ -46,19 +47,28 @@ window.World = {
         const highAngleCamera = {};
         highAngleCamera.quaternion = new THREE.Quaternion().setFromAxisAngle( new THREE.Vector3(-0.1151, 0.881, 0.2778), 0.365);
         highAngleCamera.pos = new THREE.Vector3(3.9486, 3.9486, -3.9486);
+        
+        const nadirCamera = {};
+        nadirCamera.quaternion = new THREE.Quaternion(-0.5629987615944458, 0.4139309556203889, 0.38763295669969844, 0.6011940196829653);
+        nadirCamera.pos = new THREE.Vector3(0, -2, 0);
 
         Utils.debugger.toggleCamera = function() {
             if (_this.CAMERA.currentPosition == 'frontCamera') {
                 _this.CAMERA.quaternion.copy(highAngleCamera.quaternion);
                 _this.CAMERA.position.copy(highAngleCamera.pos);
                 _this.CAMERA.currentPosition = 'highAngleCamera';
+            } else if (_this.CAMERA.currentPosition == 'highAngleCamera') {
+                _this.CAMERA.quaternion.copy(nadirCamera.quaternion);
+                _this.CAMERA.position.copy(nadirCamera.pos);
+                _this.CAMERA.currentPosition = 'nadirCamera';
             } else {
                 _this.CAMERA.quaternion.copy(frontCamera.quaternion);
                 _this.CAMERA.position.copy(frontCamera.pos);
                 _this.CAMERA.currentPosition = 'frontCamera';
             }
         }
-        // Utils.debugger.toggleCamera();
+        Utils.debugger.toggleCamera();
+        Utils.debugger.toggleCamera(); // toggle to zenit from start
 
         _this.DEBUGGER.add(Utils.debugger, 'toggleCamera');
         // midiEvents.addEventListener('P1_push', Utils.debugger.toggleCamera)

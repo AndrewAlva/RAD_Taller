@@ -28,7 +28,7 @@ var Scene9 = {
         // _this.texture1 = _this.textureLoader.load('img/map1.jpg')
         // _this.texture2 = _this.textureLoader.load('img/map2.jpg')
         // _this.levelMask = _this.textureLoader.load('img/levelMask.jpg')
-        _this.texture1 = _this.textureLoader.load('img/sundance/map1.png')
+        _this.texture1 = _this.textureLoader.load('img/sundance/map1.jpg')
         _this.texture2 = _this.textureLoader.load('img/sundance/map2.jpg')
         _this.levelMask = _this.textureLoader.load('img/sundance/levelMask2.jpg')
 

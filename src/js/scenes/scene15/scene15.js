@@ -65,8 +65,8 @@ class Sketch extends SketchScene {
         // mesh2.rotation.y = Math.PI/2;
         // _this.rt1Scene.add(mesh2)
         
-        const line1 = new Line3D({material: _this.material, height: 10, radius: 0.01,  segments: 360});
-        _this.rt1Scene.add(line1._mesh)
+        _this.line1 = new Line3D({material: _this.material, height: 10, radius: 0.01,  segments: 360});
+        _this.rt1Scene.add(_this.line1._mesh)
 
         
 
@@ -122,6 +122,8 @@ class Sketch extends SketchScene {
             _this.controller.uSignal.object.value = _this.drumLerping;
             _this.controller.uSignal.updateDisplay();
         }
+
+        _this.line1._mesh.rotation.y -= 0.01;
 
         window.expose = {
             bassline: _this.helpers.bassline,

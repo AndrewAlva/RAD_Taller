@@ -84,7 +84,7 @@ export class AudioController {
         _this.audio.crossOrigin = "Anonymous"; // To play audio through an external page (e.g. using CDN)
         _this.audio.loop = true;
         _this.audio.controls = true;
-        document.body.appendChild(_this.audio);
+        // document.body.appendChild(_this.audio);
 
         _this.source = _this.context.createMediaElementSource(_this.audio);
     }

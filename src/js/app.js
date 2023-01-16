@@ -107,7 +107,7 @@ var App = {
 
             //////////////////////
             // Save frame CCapture
-            capturer.capture( Global.CANVAS );
+            capturer.capture( World.CANVAS );
         }
 
 
@@ -133,11 +133,11 @@ var App = {
 
 
 window.onload = function() {
-    window.addEventListener('click', _ => {
+    // window.addEventListener('click', _ => {
         App.init({
             enableVR: false
         });
-    }, {once: true});
+    // }, {once: true});
 }
 
 
