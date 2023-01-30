@@ -23,7 +23,6 @@ export class SketchScene {
         
 
         ////////////// CURRENT SETUP
-        console.log('SketchScene constructor');
         this.config = _config;
         this._preRenders = [];
         this._postRenders = [];

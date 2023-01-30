@@ -7,7 +7,7 @@ uniform float uAnimate;
 
 varying vec2 vUv;
 
-#pragma glslify: rangeF = require('../shaders/modules/rangeF.glsl')
+#pragma glslify: rangeF = require('../../shaders/modules/rangeF.glsl')
 
 
 void main() {

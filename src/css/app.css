@@ -57,6 +57,10 @@ audio{
         font-weight: lighter;
     }
 
+    .rrss #poster-1 .heading, #poster-1 .subheading {
+        padding: 50px 30px;
+    }
+
     @media (min-width: 768px) {
         #poster-1 .heading, #poster-1 .subheading {
             padding: 50px 80px;
@@ -105,6 +109,10 @@ audio{
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: auto;
         font-smooth: auto;
+    }
+
+    .rrss .corners .c {
+        padding: 50px;
     }
 
     @media (min-width: 768px) {

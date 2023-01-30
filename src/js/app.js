@@ -16,7 +16,7 @@ import { VRButton } from 'three/examples/jsm/webxr/VRButton.js'
 
 import { SceneController } from './controllers/SceneController.js';
 
-import { SceneEx } from './scenes/sceneExample.js';
+import { SceneEx } from './scenes/sceneEx/sceneExample.js';
 import { Scene1 } from './scenes/scene1/scene1.js';
 import { Scene2 } from './scenes/scene2/scene2.js';
 import { Scene3 } from './scenes/scene3/scene3.js';
@@ -32,6 +32,7 @@ import { Scene12 } from './scenes/scene12/scene12.js';
 import { Scene13 } from './scenes/scene13/scene13.js';
 import { Scene14 } from './scenes/scene14/scene14.js';
 import { Scene15 } from './scenes/scene15/scene15.js';
+import { Scene16 } from './scenes/scene16/scene16.js';
 
 var App = {
     init: async function({ enableVR = false } = {}) {
@@ -85,9 +86,10 @@ var App = {
             Scene13,
             Scene15,
             Scene12,
+            Scene16,
         ]);
 
-        SceneController.activateScene(Scene7);
+        SceneController.activateScene(Scene16);
         window.SC = SceneController;
 
         /**
