@@ -67,7 +67,7 @@ window.World = {
                 _this.CAMERA.currentPosition = 'frontCamera';
             }
         }
-        Utils.debugger.toggleCamera();
+        // Utils.debugger.toggleCamera();
         // Utils.debugger.toggleCamera(); // toggle to zenit from start
 
         _this.DEBUGGER.add(Utils.debugger, 'toggleCamera');
