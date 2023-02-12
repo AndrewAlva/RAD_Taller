@@ -23,3 +23,7 @@ Math.verlet = function(originalValue, finalValue, friction) {
 Math.verletVec = function(vec1, vec2, friction) {
     return vec1.add( vec2.sub(vec1).multiplyScalar(friction) )
 }
+
+Math.radians = function(degrees) {
+    return degrees * (Math.PI / 180);
+}
