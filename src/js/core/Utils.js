@@ -68,7 +68,7 @@ import * as dat from 'dat.gui'
         framerate: 60,
         verbose: true,
         format: 'png',
-        timeLimit: 7
+        timeLimit: 10
     });
 
 }) ();
