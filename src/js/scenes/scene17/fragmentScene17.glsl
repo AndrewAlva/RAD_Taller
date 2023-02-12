@@ -53,6 +53,7 @@ float cnoise(vec2 P)
 }
 
 void main() {
+    float speed = uAnimate * .1;
     float ratio = uSize.x / uSize.y;
     vec2 squaredUv = vec2(
         vUv.x,
@@ -66,7 +67,7 @@ void main() {
 
     float borderWidth = 0.035;
 
-    float noise = cnoise((squaredUv * 1.5) + vec2(0., uAnimate * .05));
+    float noise = cnoise((squaredUv * 1.5) + vec2(sin(speed * 1.5) * 0.95, speed));
     float topo = sin(noise * (30. + (uSignal * 10.)));
     topo = step(0.82 - (0.4 * uProgress), topo);
 
