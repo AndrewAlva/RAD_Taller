@@ -30,21 +30,22 @@ class Sketch extends SketchScene {
             fragmentShader: sceneFragment,
             side: THREE.DoubleSide,
             transparent: true,
-            depthTest: false,
+            // depthTest: false,
+            // wireframe: true,
             // blending: THREE.AdditiveBlending,
             uniforms: {
                 uSize: { value: planeSize },
                 
-                uProgress: { value: 0.6 }, // MIDI hooked
-                uSignal: { value: 0.5 }, // Microphone hooked
+                uProgress: { value: 1.0 }, // MIDI hooked
+                uSignal: { value: 0.3 }, // Microphone hooked
                 
                 uAnimate: { value: 0 },
             },
         });
 
         const mesh = new THREE.Mesh(geometry, _this.material)
-        _this.line1 = new Line3D({material: _this.material, height: 10, radius: 0.05,  segments: 360});
-        _this.line1._mesh.rotation.z = Math.radians(90);
+        _this.line1 = new Line3D({material: _this.material, height: 2, radius: 0.1,  segments: 60, radialSegments: 20});
+        _this.line1._mesh.rotation.z = Math.radians(-90);
         console.log(_this.line1);
         _this.rt1Scene.add(_this.line1._mesh)
 

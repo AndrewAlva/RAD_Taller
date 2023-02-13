@@ -3,12 +3,12 @@ import { BufferGeometryUtils } from 'three/examples/jsm/utils/BufferGeometryUtil
 
 export class Line3D {
     constructor( _config = {} ) {
-        this.config = Object.assign({radius: 0.1, height: 3, segments: 60}, _config);
-        this._mesh = this.initMesh(this.config.radius, this.config.height, this.config.segments);
+        this.config = Object.assign({radius: 0.1, height: 3, segments: 60, radialSegments: 3}, _config);
+        this._mesh = this.initMesh(this.config.radius, this.config.height, this.config.segments, this.config.radialSegments);
     }
 
-    initMesh(radius, height, segments) {
-        var geom = new THREE.CylinderGeometry(radius, radius, height, 3, segments, true);
+    initMesh(radius, height, segments, radialSegments) {
+        var geom = new THREE.CylinderGeometry(radius, radius, height, radialSegments, segments, true);
         var material = this.config.material || Utils3D.getTestShaderMaterial('color', {});
         return new THREE.Mesh(geom, material);
     }
