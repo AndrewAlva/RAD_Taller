@@ -37,22 +37,54 @@ class Sketch extends SketchScene {
                 uSize: { value: planeSize },
                 
                 uProgress: { value: 1.0 }, // MIDI hooked
-                uSignal: { value: 0.3 }, // Microphone hooked
+                uSignal: { value: 0.56 }, // Microphone hooked
                 
                 uAnimate: { value: 0 },
+                
+                uStrength: { value: 1 }, // for line height
             },
         });
 
         const mesh = new THREE.Mesh(geometry, _this.material)
-        _this.line1 = new Line3D({material: _this.material, height: 2, radius: 0.1,  segments: 60, radialSegments: 20});
+        _this.line1 = new Line3D({material: _this.material, height: 1, radius: 0.00375,  segments: 70, radialSegments: 20});
         _this.line1._mesh.rotation.z = Math.radians(-90);
         console.log(_this.line1);
         _this.rt1Scene.add(_this.line1._mesh)
+        
+        _this.material2 = _this.material.clone();
+        _this.material2.uniforms.uStrength.value = 0.8;
+        _this.line2 = new Line3D({material: _this.material2, height: 1, radius: 0.00375,  segments: 70, radialSegments: 20});
+        _this.line2._mesh.rotation.z = Math.radians(-90);
+        _this.rt1Scene.add(_this.line2._mesh)
+        
+        _this.material3 = _this.material.clone();
+        _this.material3.uniforms.uStrength.value = 0.6;
+        _this.line3 = new Line3D({material: _this.material3, height: 1, radius: 0.00375,  segments: 70, radialSegments: 20});
+        _this.line3._mesh.rotation.z = Math.radians(-90);
+        _this.rt1Scene.add(_this.line3._mesh)
+        
+        _this.material4 = _this.material.clone();
+        _this.material4.uniforms.uStrength.value = 0.4;
+        _this.line4 = new Line3D({material: _this.material4, height: 1, radius: 0.00375,  segments: 70, radialSegments: 20});
+        _this.line4._mesh.rotation.z = Math.radians(-90);
+        _this.rt1Scene.add(_this.line4._mesh)
+        
+        _this.material5 = _this.material.clone();
+        _this.material5.uniforms.uStrength.value = 0.2;
+        _this.line5 = new Line3D({material: _this.material5, height: 1, radius: 0.00375,  segments: 70, radialSegments: 20});
+        _this.line5._mesh.rotation.z = Math.radians(-90);
+        _this.rt1Scene.add(_this.line5._mesh)
+        
+        _this.material6 = _this.material.clone();
+        _this.material6.uniforms.uStrength.value = 0;
+        _this.line6 = new Line3D({material: _this.material6, height: 1, radius: 0.00375,  segments: 70, radialSegments: 20});
+        _this.line6._mesh.rotation.z = Math.radians(-90);
+        _this.rt1Scene.add(_this.line6._mesh)
 
         /**
          * Audio controllers
          */
-        _this.controller.uSignal = _this.Debugger.add(_this.material.uniforms.uSignal, 'value').min(0).max(1).step(0.00001).name('uSignal');
+        _this.controller.uSignal = _this.Debugger.add(_this.material.uniforms.uSignal, 'value').min(0).max(2).step(0.00001).name('uSignal');
         ACEvents.addEventListener('AC_pause', _this.resetSignal.bind(_this));
 
         _this.controller.uProgress = _this.Debugger.add(_this.material.uniforms.uProgress, 'value').min(0).max(1).step(0.00001).name('uProgress');
@@ -63,7 +95,12 @@ class Sketch extends SketchScene {
 
     draw() {
         var _this = this;
-        _this.material.uniforms.uAnimate.value = _this.animate;
+        _this.material.uniforms.uAnimate.value = _this.animate; // + 5;
+        _this.material2.uniforms.uAnimate.value = _this.animate; // + (1 * .99999975) + 5;
+        _this.material3.uniforms.uAnimate.value = _this.animate; // + (2 * .99999975) + 5;
+        _this.material4.uniforms.uAnimate.value = _this.animate; // + (3 * .99999975) + 5;
+        _this.material5.uniforms.uAnimate.value = _this.animate; // + (4 * .99999975) + 5;
+        _this.material6.uniforms.uAnimate.value = _this.animate; // + (5 * .99999975) + 5;
 
         // Audio input
         const drum = AC.audioSignal(AC.analyserNode, AC.frequencyData, 150, 2500);

@@ -24,7 +24,8 @@ void main() {
     );
 
     //////// Ripples
-    float rippleScale = uSignal * 100.;
+    // float rippleScale = uSignal * 100.;
+    float rippleScale = 20.;
 
     float circle = distance( squaredUv, squaredCenter );
     float ripples = abs( sin( (circle * rippleScale) + uAnimate) );
@@ -40,14 +41,13 @@ void main() {
     // float sineProgression = abs(vUv.y -.5) * 2.;
     // sineProgression = 1. - sineProgression;
 
-    float sineProgression = 1. - pow(1. - vUv.y, 3.);
-    sineProgression *= 1. - vUv.y;
-    sineProgression *= 2.1;
+    float sineProgression = 1. - pow(1. - vUv.y, 1.05);
+    // sineProgression *= 1. - vUv.y;
+    // sineProgression *= 2.1;
 
     // color = vec3( 1., 0.4, 0. );
     // color = vec3( sineProgression );
-
-    color += vec3( 1., 0., 0. );
+    color = vec3( 0. );
 
     gl_FragColor = vec4(color, alpha);
 }
