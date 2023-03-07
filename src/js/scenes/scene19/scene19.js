@@ -1,6 +1,6 @@
 import * as THREE from 'three'
-import sceneVertex from './vertexScene18.glsl'
-import sceneFragment from './fragmentScene18.glsl'
+import sceneVertex from './vertexScene19.glsl'
+import sceneFragment from './fragmentScene19.glsl'
 import { SketchScene } from '../SketchScene.js'
 import { Line3D } from '../../modules/Line3D.js'
 
@@ -17,6 +17,14 @@ class Sketch extends SketchScene {
 
     setup() {
         var _this = this;
+
+        /**
+         * Base Class config
+         */
+        _this.controller.debugger.speed.object.speed = 0.02;
+        _this.controller.debugger.speed.object.currentSpeed = 0.02;
+        _this.controller.debugger.speed.updateDisplay();
+
 
         /**
          * Object
@@ -36,7 +44,7 @@ class Sketch extends SketchScene {
                 uSize: { value: planeSize },
                 
                 uProgress: { value: 1.0 }, // MIDI hooked
-                uSignal: { value: 0.56 }, // Microphone hooked
+                uSignal: { value: 0.16 }, // Microphone hooked
                 
                 uAnimate: { value: 0 },
                 
@@ -45,38 +53,38 @@ class Sketch extends SketchScene {
         });
 
         const mesh = new THREE.Mesh(geometry, _this.material)
-        _this.line1 = new Line3D({material: _this.material, height: 1, radius: 0.00375,  segments: 70, radialSegments: 20});
-        _this.line1._mesh.rotation.z = Math.radians(-90);
+        _this.line1 = new Line3D({material: _this.material, height: 1.5, radius: 0.00375,  segments: 70, radialSegments: 20});
+        _this.line1._mesh.rotation.z = Math.radians(180);
         _this.rt1Scene.add(_this.line1._mesh)
         
         _this.material2 = _this.material.clone();
-        _this.material2.uniforms.uStrength.value = 0.8;
-        _this.line2 = new Line3D({material: _this.material2, height: 1, radius: 0.00375,  segments: 70, radialSegments: 20});
-        _this.line2._mesh.rotation.z = Math.radians(-90);
+        // _this.material2.uniforms.uStrength.value = 0.8;
+        _this.line2 = new Line3D({material: _this.material2, height: 1.5, radius: 0.00375,  segments: 70, radialSegments: 20});
+        _this.line2._mesh.rotation.z = Math.radians(180);
         _this.rt1Scene.add(_this.line2._mesh)
         
         _this.material3 = _this.material.clone();
-        _this.material3.uniforms.uStrength.value = 0.6;
-        _this.line3 = new Line3D({material: _this.material3, height: 1, radius: 0.00375,  segments: 70, radialSegments: 20});
-        _this.line3._mesh.rotation.z = Math.radians(-90);
+        // _this.material3.uniforms.uStrength.value = 0.6;
+        _this.line3 = new Line3D({material: _this.material3, height: 1.5, radius: 0.00375,  segments: 70, radialSegments: 20});
+        _this.line3._mesh.rotation.z = Math.radians(180);
         _this.rt1Scene.add(_this.line3._mesh)
         
         _this.material4 = _this.material.clone();
-        _this.material4.uniforms.uStrength.value = 0.4;
-        _this.line4 = new Line3D({material: _this.material4, height: 1, radius: 0.00375,  segments: 70, radialSegments: 20});
-        _this.line4._mesh.rotation.z = Math.radians(-90);
+        // _this.material4.uniforms.uStrength.value = 0.4;
+        _this.line4 = new Line3D({material: _this.material4, height: 1.5, radius: 0.00375,  segments: 70, radialSegments: 20});
+        _this.line4._mesh.rotation.z = Math.radians(180);
         _this.rt1Scene.add(_this.line4._mesh)
         
         _this.material5 = _this.material.clone();
-        _this.material5.uniforms.uStrength.value = 0.2;
-        _this.line5 = new Line3D({material: _this.material5, height: 1, radius: 0.00375,  segments: 70, radialSegments: 20});
-        _this.line5._mesh.rotation.z = Math.radians(-90);
+        // _this.material5.uniforms.uStrength.value = 0.2;
+        _this.line5 = new Line3D({material: _this.material5, height: 1.5, radius: 0.00375,  segments: 70, radialSegments: 20});
+        _this.line5._mesh.rotation.z = Math.radians(180);
         _this.rt1Scene.add(_this.line5._mesh)
         
         _this.material6 = _this.material.clone();
-        _this.material6.uniforms.uStrength.value = 0;
-        _this.line6 = new Line3D({material: _this.material6, height: 1, radius: 0.00375,  segments: 70, radialSegments: 20});
-        _this.line6._mesh.rotation.z = Math.radians(-90);
+        // _this.material6.uniforms.uStrength.value = 0.2;
+        _this.line6 = new Line3D({material: _this.material6, height: 1.5, radius: 0.00375,  segments: 70, radialSegments: 20});
+        _this.line6._mesh.rotation.z = Math.radians(180);
         _this.rt1Scene.add(_this.line6._mesh)
 
         /**
@@ -93,12 +101,12 @@ class Sketch extends SketchScene {
 
     draw() {
         var _this = this;
-        _this.material.uniforms.uAnimate.value = _this.animate; // + 5;
-        _this.material2.uniforms.uAnimate.value = _this.animate; // + (1 * .99999975) + 5;
-        _this.material3.uniforms.uAnimate.value = _this.animate; // + (2 * .99999975) + 5;
-        _this.material4.uniforms.uAnimate.value = _this.animate; // + (3 * .99999975) + 5;
-        _this.material5.uniforms.uAnimate.value = _this.animate; // + (4 * .99999975) + 5;
-        _this.material6.uniforms.uAnimate.value = _this.animate; // + (5 * .99999975) + 5;
+        _this.material.uniforms.uAnimate.value = _this.animate + 5;
+        _this.material2.uniforms.uAnimate.value = _this.animate + (1 * 1) + 5;
+        _this.material3.uniforms.uAnimate.value = _this.animate + (2 * 1) + 5;
+        _this.material4.uniforms.uAnimate.value = _this.animate + (3 * 1) + 5;
+        _this.material5.uniforms.uAnimate.value = _this.animate + (4 * 1) + 5;
+        _this.material6.uniforms.uAnimate.value = _this.animate + (5 * 1) + 5;
 
         // Audio input
         const drum = AC.audioSignal(AC.analyserNode, AC.frequencyData, 150, 2500);
@@ -140,5 +148,5 @@ class Sketch extends SketchScene {
     }
 }
 
-var Scene18 = new Sketch({sceneName: '18. Positive sine'});
-export {Scene18};
+var Scene19 = new Sketch({sceneName: '19. Daits Flower'});
+export {Scene19};

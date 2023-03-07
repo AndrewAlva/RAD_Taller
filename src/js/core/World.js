@@ -17,7 +17,7 @@ window.World = {
     initGUI: function() {
         this.DEBUGGER = Utils.gui.addFolder('Global');
         this.DEBUGGER.open();
-        Utils.guiHide();
+        // Utils.guiHide();
     },
 
     initSetup: function() {
