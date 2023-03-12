@@ -57,6 +57,7 @@ class Sketch extends SketchScene {
         );
         
         _this.polenDraw();
+        _this.flowerDraw();
     }
 
     /**
@@ -79,12 +80,20 @@ class Sketch extends SketchScene {
     /**
      * Web Audio API Handlers
      */
-    resetSignal() {
+    resetPolenSignal() {
         var _this = this;
         if ( !_this.active ) return;
 
         _this.controller.uPolenSignal.object.value = 0;
         _this.controller.uPolenSignal.updateDisplay();
+    }
+
+    resetSignal() {
+        var _this = this;
+        if ( !_this.active ) return;
+
+        _this.controller.uSignal.object.value = 0;
+        _this.controller.uSignal.updateDisplay();
     }
 
     /**
@@ -153,7 +162,7 @@ class Sketch extends SketchScene {
          * Audio controllers
          */
         _this.controller.uPolenSignal = _this.Debugger.add(_this.polenMaterial.uniforms.uPolenSignal, 'value').min(0).max(2).step(0.00001).name('uPolenSignal');
-        ACEvents.addEventListener('AC_pause', _this.resetSignal.bind(_this));
+        ACEvents.addEventListener('AC_pause', _this.resetPolenSignal.bind(_this));
 
         _this.controller.uPolenProgress = _this.Debugger.add(_this.polenMaterial.uniforms.uPolenProgress, 'value').min(0).max(1).step(0.00001).name('uPolenProgress');
         midiEvents.addEventListener('K1_change', _this.updatePolenProgress.bind(_this));
@@ -183,15 +192,55 @@ class Sketch extends SketchScene {
      */
     flowerSetup() {
         var _this = this;
+
+        // Layers
+        _this.flowerLayersData = [
+            { id: 'tallo', imgSrc: 'img/daits-flower/tallo.png', width: 0.4823, scale: 1},
+
+            { id: 'h1', imgSrc: 'img/daits-flower/h1.png', width: 1.4460, scale: 0.5428},
+            { id: 'h2', imgSrc: 'img/daits-flower/h2.png', width: 2.2062, scale: 0.5136},
+            { id: 'h3', imgSrc: 'img/daits-flower/h3.png', width: 1.3454, scale: 0.6104},
+            { id: 'h4', imgSrc: 'img/daits-flower/h4.png', width: 0.8564, scale: 0.8153},
+            
+            { id: 'p1', imgSrc: 'img/daits-flower/p1.png', width: 0.7390, scale: 0.7346},
+            { id: 'p2', imgSrc: 'img/daits-flower/p2.png', width: 0.9431, scale: 0.6922},
+            { id: 'p3', imgSrc: 'img/daits-flower/p3.png', width: 1.5714, scale: 0.4026},
+            { id: 'p4', imgSrc: 'img/daits-flower/p4.png', width: 4.3928, scale: 0.1977},
+            { id: 'p5', imgSrc: 'img/daits-flower/p5.png', width: 0.6025, scale: 0.7769},
+
+            { id: 'b1', imgSrc: 'img/daits-flower/b1.png', width: 0.9841, scale: 0.4470},
+            { id: 'b2', imgSrc: 'img/daits-flower/b2.png', width: 1.0276, scale: 0.3289},
+            { id: 'b3', imgSrc: 'img/daits-flower/b3.png', width: 0.9047, scale: 0.4238},
+            { id: 'b4', imgSrc: 'img/daits-flower/b4.png', width: 0.6004, scale: 0.4873},
+            { id: 'b5', imgSrc: 'img/daits-flower/b5.png', width: 0.6590, scale: 0.4883},
+
+            { id: 'core', imgSrc: 'img/daits-flower/core.png', width: 1.0833, scale: 1},
+        ];
         /**
-         * Object
+         * Objects
          */
-        let planeSize = new THREE.Vector2(0.98, 1);
+        _this.flowerLayers = [];
+        _this.flowerLayersData.forEach((layer, idx) => {
+            _this.flowerLayers[idx] = _this.flowerLayer(layer);
+        });
+        console.log(_this.flowerLayers);
+
+    }
+
+    flowerLayer({id, imgSrc, width, scale = 1}) {
+        var _this = this;
+        var keys = {
+            texture: `texture_${id}Flower`,
+            material: `material_${id}Flower`,
+            uSignal: `uSignal_${id}Flower`,
+            uProgress: `uProgress_${id}Flower`,
+        }
+
+        let planeSize = new THREE.Vector2(width, 1).multiplyScalar(scale);
         const geometry = new THREE.PlaneGeometry(planeSize.x, planeSize.y, 300, 300)
-        _this.texture1 = _this.textureLoader.load('img/daits-flower/b1.png')
-        console.log(_this.texture1);
+        _this[keys.texture] = _this.textureLoader.load(imgSrc)
         
-        _this.material = new THREE.ShaderMaterial({
+        _this[keys.material] = new THREE.ShaderMaterial({
             vertexShader: flowerPlaneVert,
             fragmentShader: flowerPlaneFrag,
             side: THREE.DoubleSide,
@@ -203,26 +252,63 @@ class Sketch extends SketchScene {
                 
                 uProgress: { value: 0.6 }, // MIDI hooked
                 uSignal: { value: 0.5 }, // Microphone hooked
-                tMap1: { value: _this.texture1 },
+                tMap1: { value: _this[keys.texture] },
                 
                 uAnimate: { value: 0 },
             },
         });
 
-        const mesh = new THREE.Mesh(geometry, _this.material)
+        const mesh = new THREE.Mesh(geometry, _this[keys.material])
         _this.rt1Scene.add(mesh)
 
         /**
          * Audio controllers
          */
-        _this.controller.uSignal = _this.Debugger.add(_this.material.uniforms.uSignal, 'value').min(0).max(1).step(0.00001).name('uSignal');
-        ACEvents.addEventListener('AC_pause', _this.resetSignal.bind(_this));
-
-        _this.controller.uProgress = _this.Debugger.add(_this.material.uniforms.uProgress, 'value').min(0).max(1).step(0.00001).name('uProgress');
-        midiEvents.addEventListener('K1_change', _this.updateProgress.bind(_this));
-    }
+        _this.controller[keys.uSignal] = _this.Debugger.add(_this[keys.material].uniforms.uSignal, 'value').min(0).max(1).step(0.00001).name(keys.uSignal);
+        _this.controller[keys.uProgress] = _this.Debugger.add(_this[keys.material].uniforms.uProgress, 'value').min(0).max(1).step(0.00001).name(keys.uProgress);
+        function resetSignal() {
+            if ( !_this.active ) return;
     
-    flowerDraw() {}
+            _this.controller[keys.uSignal].object.value = 0;
+            _this.controller[keys.uSignal].updateDisplay();
+        }
+        function updateProgress(e) {
+            let val = Math.range(e.velocity, 0, 127, 0.00001, 0.95);
+            _this.controller[keys.uProgress].object.value = val;
+            _this.controller[keys.uProgress].updateDisplay();
+        }
+        ACEvents.addEventListener('AC_pause', resetSignal.bind(_this));
+        midiEvents.addEventListener('K1_change', updateProgress.bind(_this));
+
+        /**
+         * Animations
+         */
+        function drawLayer() {
+            _this[keys.material].uniforms.uAnimate.value = _this.animate;
+            
+            if (AC.state.playing) {
+                // Vertex updates
+                
+                // Fragment updates
+                _this.controller[keys.uSignal].object.value = _this.drumLerping;
+                _this.controller[keys.uSignal].updateDisplay();
+            }
+        }
+
+        return {
+            mesh: mesh,
+            shader: _this[keys.material],
+            draw: drawLayer,
+            keys: keys
+        }
+    }
+
+    flowerDraw() {
+        var _this = this;
+        _this.flowerLayers.forEach((layer, idx) => {
+            layer.draw();
+        });
+    }
 }
 
 var Scene19 = new Sketch({sceneName: '19. Daits Flower'});
