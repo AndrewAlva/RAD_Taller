@@ -1,7 +1,7 @@
 uniform vec2 uSize;
 
 uniform float uProgress;
-uniform float uSignal;
+uniform float uPolenSignal;
 
 uniform float uAnimate;
 
@@ -24,12 +24,12 @@ void main() {
     );
 
     //////// Ripples
-    // float rippleScale = uSignal * 100.;
+    // float rippleScale = uPolenSignal * 100.;
     float rippleScale = 20.;
 
     float circle = distance( squaredUv, squaredCenter );
     float ripples = abs( sin( (circle * rippleScale) + uAnimate) );
-    float blackGradient = uSignal * .75 - distance( squaredUv, squaredCenter ) * .5;
+    float blackGradient = uPolenSignal * .75 - distance( squaredUv, squaredCenter ) * .5;
     ripples = clamp(ripples - blackGradient, 0., 1.);
     // ripples = smoothstep(0.4, .9, ripples);
 

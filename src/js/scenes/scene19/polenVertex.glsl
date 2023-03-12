@@ -1,4 +1,4 @@
-uniform float uSignal;
+uniform float uPolenSignal;
 uniform float uAnimate;
 uniform float uStrength;
 
@@ -31,7 +31,7 @@ void main()
     sineProgression *= height;
     // pos.x -= sineProgression * .5;
 
-    float sine = sin((uv.y * (uSignal * period)) + (uAnimate) );
+    float sine = sin((uv.y * (uPolenSignal * period)) + (uAnimate) );
     sine *= pow(1. - uv.y, 0.7);
     sine *= (1. - uv.y);
     sine *= .5;
