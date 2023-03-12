@@ -1,6 +1,6 @@
 uniform vec2 uSize;
 
-uniform float uProgress;
+uniform float uPolenProgress;
 uniform float uPolenSignal;
 
 uniform float uAnimate;
@@ -35,7 +35,7 @@ void main() {
 
 
     vec3 color = vec3(ripples);
-    float alpha = uProgress;
+    float alpha = uPolenProgress;
 
     // Middle
     // float sineProgression = abs(vUv.y -.5) * 2.;
