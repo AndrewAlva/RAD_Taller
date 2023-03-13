@@ -33,6 +33,7 @@ void main() {
 
 
     vec3 color = vec3(ripples);
+    // vec3 color = vec3(1., 0., 0.);
     float alpha = uProgress;
 
     vec4 tex1 = texture2D(tMap1, vUv).rrrr;

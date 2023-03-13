@@ -193,6 +193,10 @@ class Sketch extends SketchScene {
     flowerSetup() {
         var _this = this;
 
+        
+        /**
+         * Objects
+         */
         // Layers
         _this.flowerLayersData = [
             { id: 'tallo', imgSrc: 'img/daits-flower/tallo.png', width: 0.4823, scale: 1},
@@ -214,17 +218,37 @@ class Sketch extends SketchScene {
             { id: 'b4', imgSrc: 'img/daits-flower/b4.png', width: 0.6004, scale: 0.4873},
             { id: 'b5', imgSrc: 'img/daits-flower/b5.png', width: 0.6590, scale: 0.4883},
 
-            { id: 'core', imgSrc: 'img/daits-flower/core.png', width: 1.0833, scale: 1},
+            { id: 'core', imgSrc: 'img/daits-flower/core.png', width: 1.0833, scale: 0.1574},
         ];
-        /**
-         * Objects
-         */
-        _this.flowerLayers = [];
-        _this.flowerLayersData.forEach((layer, idx) => {
-            _this.flowerLayers[idx] = _this.flowerLayer(layer);
-        });
-        console.log(_this.flowerLayers);
 
+        _this.flowerLayers = [];
+        _this.flowerGroup = new THREE.Group();
+        _this.rt1Scene.add(_this.flowerGroup);
+        _this.flowerLayersData.forEach((layer, idx) => {
+            _this.flowerLayers[layer.id] = _this.flowerLayer(layer);
+        });
+
+        // Positions
+        _this.flowerLayers.tallo.mesh.position.set(0.48, -0.6);
+
+        _this.flowerLayers.h1.mesh.position.set(0.619, 0.08);
+        _this.flowerLayers.h2.mesh.position.set(-0.81, -0.1285);
+        _this.flowerLayers.h3.mesh.position.set(-0.421, -0.348);
+        _this.flowerLayers.h4.mesh.position.set(0.02, -0.52);
+        
+        _this.flowerLayers.p1.mesh.position.set(-0.113, 0.35);
+        _this.flowerLayers.p2.mesh.position.set(-0.288, 0.295);
+        _this.flowerLayers.p3.mesh.position.set(-0.4, 0.07);
+        _this.flowerLayers.p4.mesh.position.set(-0.166, -0.175);
+        _this.flowerLayers.p5.mesh.position.set(0.272, 0.254);
+        
+        _this.flowerLayers.b1.mesh.position.set(0.082, 0.045);
+        _this.flowerLayers.b2.mesh.position.set(-0.182, 0.0175);
+        _this.flowerLayers.b3.mesh.position.set(-0.16, 0.15);
+        _this.flowerLayers.b4.mesh.position.set(-0.029, 0.2);
+        _this.flowerLayers.b5.mesh.position.set(0.176, 0.17);
+        
+        _this.flowerLayers.core.mesh.position.set(-0.03, 0.086);
     }
 
     flowerLayer({id, imgSrc, width, scale = 1}) {
@@ -259,7 +283,7 @@ class Sketch extends SketchScene {
         });
 
         const mesh = new THREE.Mesh(geometry, _this[keys.material])
-        _this.rt1Scene.add(mesh)
+        _this.flowerGroup.add(mesh)
 
         /**
          * Audio controllers
