@@ -329,9 +329,11 @@ class Sketch extends SketchScene {
 
     flowerDraw() {
         var _this = this;
-        _this.flowerLayers.forEach((layer, idx) => {
-            layer.draw();
-        });
+        for (const key in _this.flowerLayers) {
+            if (_this.flowerLayers.hasOwnProperty(key)) {
+                _this.flowerLayers[key].draw();
+            }
+        }
     }
 }
 
