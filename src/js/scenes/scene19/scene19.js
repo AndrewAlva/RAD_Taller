@@ -210,26 +210,26 @@ class Sketch extends SketchScene {
          */
         // Layers
         _this.flowerLayersData = [
-            { id: 'tallo', shaderName:'tallo', imgSrc: 'img/daits-flower/tallo.png', zPos: 0, width: 0.4823, scale: 1},
+            { id: 'tallo', shaderName:'tallo', imgSrc: 'img/daits-flower/tallo.png', zPos: 0, renderOrder: 1, width: 0.4823, scale: 1},
 
-            { id: 'h1', shaderName:'hoja', imgSrc: 'img/daits-flower/h1.png', zPos: 0.0014, width: 1.4460, scale: 0.5428},
-            { id: 'h2', shaderName:'hoja', imgSrc: 'img/daits-flower/h2.png', zPos: 0.0013, width: 2.2062, scale: 0.5136},
-            { id: 'h3', shaderName:'hoja', imgSrc: 'img/daits-flower/h3.png', zPos: 0.0012, width: 1.3454, scale: 0.6104},
-            { id: 'h4', shaderName:'hoja', imgSrc: 'img/daits-flower/h4.png', zPos: 0.0011, width: 0.8564, scale: 0.8153},
+            { id: 'h1', shaderName:'hoja', imgSrc: 'img/daits-flower/h1.png', zPos: 0.008, renderOrder: 5, width: 1.4460, scale: 0.5428},
+            { id: 'h2', shaderName:'hoja', imgSrc: 'img/daits-flower/h2.png', zPos: 0.006, renderOrder: 4, width: 2.2062, scale: 0.5136},
+            { id: 'h3', shaderName:'hoja', imgSrc: 'img/daits-flower/h3.png', zPos: 0.004, renderOrder: 3, width: 1.3454, scale: 0.6104},
+            { id: 'h4', shaderName:'hoja', imgSrc: 'img/daits-flower/h4.png', zPos: 0.002, renderOrder: 2, width: 0.8564, scale: 0.8153},
             
-            { id: 'p1', shaderName:'petalo', imgSrc: 'img/daits-flower/p1.png', zPos: 0.0021, width: 0.7390, scale: 0.7346},
-            { id: 'p2', shaderName:'petalo', imgSrc: 'img/daits-flower/p2.png', zPos: 0.0022, width: 0.9431, scale: 0.6922},
-            { id: 'p3', shaderName:'petalo', imgSrc: 'img/daits-flower/p3.png', zPos: 0.0024, width: 1.5714, scale: 0.4026},
-            { id: 'p4', shaderName:'petalo', imgSrc: 'img/daits-flower/p4.png', zPos: 0.0023, width: 4.3928, scale: 0.1977},
-            { id: 'p5', shaderName:'petalo', imgSrc: 'img/daits-flower/p5.png', zPos: 0.0025, width: 0.6025, scale: 0.7769},
+            { id: 'p1', shaderName:'petalo', imgSrc: 'img/daits-flower/p1.png', zPos: 0.010, renderOrder: 6, width: 0.7390, scale: 0.7346},
+            { id: 'p2', shaderName:'petalo', imgSrc: 'img/daits-flower/p2.png', zPos: 0.012, renderOrder: 7, width: 0.9431, scale: 0.6922},
+            { id: 'p3', shaderName:'petalo', imgSrc: 'img/daits-flower/p3.png', zPos: 0.016, renderOrder: 9, width: 1.5714, scale: 0.4026},
+            { id: 'p4', shaderName:'petalo', imgSrc: 'img/daits-flower/p4.png', zPos: 0.014, renderOrder: 8, width: 4.3928, scale: 0.1977},
+            { id: 'p5', shaderName:'petalo', imgSrc: 'img/daits-flower/p5.png', zPos: 0.018, renderOrder: 10, width: 0.6025, scale: 0.7769},
 
-            { id: 'b1', shaderName:'bulbo', imgSrc: 'img/daits-flower/b1.png', zPos: 0.0036, width: 0.9841, scale: 0.4470},
-            { id: 'b2', shaderName:'bulbo', imgSrc: 'img/daits-flower/b2.png', zPos: 0.0035, width: 1.0276, scale: 0.3289},
-            { id: 'b3', shaderName:'bulbo', imgSrc: 'img/daits-flower/b3.png', zPos: 0.0033, width: 0.9047, scale: 0.4238},
-            { id: 'b4', shaderName:'bulbo', imgSrc: 'img/daits-flower/b4.png', zPos: 0.0032, width: 0.6004, scale: 0.4873},
-            { id: 'b5', shaderName:'bulbo', imgSrc: 'img/daits-flower/b5.png', zPos: 0.0031, width: 0.6590, scale: 0.4883},
+            { id: 'b1', shaderName:'bulbo', imgSrc: 'img/daits-flower/b1.png', zPos: 0.030, renderOrder: 16, width: 0.9841, scale: 0.4470},
+            { id: 'b2', shaderName:'bulbo', imgSrc: 'img/daits-flower/b2.png', zPos: 0.028, renderOrder: 15, width: 1.0276, scale: 0.3289},
+            { id: 'b3', shaderName:'bulbo', imgSrc: 'img/daits-flower/b3.png', zPos: 0.024, renderOrder: 13, width: 0.9047, scale: 0.4238},
+            { id: 'b4', shaderName:'bulbo', imgSrc: 'img/daits-flower/b4.png', zPos: 0.022, renderOrder: 12, width: 0.6004, scale: 0.4873},
+            { id: 'b5', shaderName:'bulbo', imgSrc: 'img/daits-flower/b5.png', zPos: 0.020, renderOrder: 11, width: 0.6590, scale: 0.4883},
 
-            { id: 'core', shaderName: 'core', imgSrc: 'img/daits-flower/core.png', zPos: 0.0034, width: 1.0833, scale: 0.1574},
+            { id: 'core', shaderName: 'core', imgSrc: 'img/daits-flower/core.png', zPos: 0.026, renderOrder: 14, width: 1.0833, scale: 0.1574},
         ];
 
         _this.flowerLayers = [];
@@ -262,7 +262,7 @@ class Sketch extends SketchScene {
         _this.flowerLayers.core.mesh.position.set(-0.03, 0.086);
     }
 
-    flowerLayer({id, shaderName, imgSrc, zPos, width, scale = 1}) {
+    flowerLayer({id, shaderName, imgSrc, zPos, renderOrder, width, scale = 1}) {
         var _this = this;
         var keys = {
             texture: `texture_${id}Flower`,
@@ -310,9 +310,11 @@ class Sketch extends SketchScene {
         _this[keys.material] = new THREE.ShaderMaterial({
             vertexShader: vertexShader,
             fragmentShader: fragmentShader,
-            side: THREE.DoubleSide,
+            // side: THREE.DoubleSide,
+            side: THREE.FrontSide,
             transparent: true,
-            depthTest: true,
+            depthTest: false,
+            depthWrite: false,
             // blending: THREE.AdditiveBlending,
             uniforms: {
                 uSize: { value: planeSize },
@@ -330,7 +332,8 @@ class Sketch extends SketchScene {
         const mesh = new THREE.Mesh(geometry, _this[keys.material]);
         mesh.position.z = zPos * 10.;
         _this.flowerGroup.add(mesh);
-        _this.renderOrderCount = _this.renderOrderCount ? _this.renderOrderCount + 1 : 1;
+        // _this.renderOrderCount = _this.renderOrderCount ? _this.renderOrderCount + 1 : 1;
+        _this.renderOrderCount = renderOrder;
         mesh.renderOrder = _this.renderOrderCount;
 
         /**
