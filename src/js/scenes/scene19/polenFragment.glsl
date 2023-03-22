@@ -54,8 +54,11 @@ void main() {
     float travel = fract(yPoint * 4.);
     // travel = step(travel, 1. - 0.94);
     travel = step(travel, 0.94);
-    color = vec3(travel);
+    color = vec3(1. - travel);
     alpha *= 0.1;
+
+    vec3 hexa = vec3(1., 0., 1.);
+    color += hexa;
 
     gl_FragColor = vec4(color, alpha);
 }

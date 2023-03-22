@@ -5,7 +5,7 @@ void main()
 {
     vec3 pos = position;
 
-    float time = uAnimate * 10.;
+    float time = uAnimate * 5.;
     float strength = 0.009;
 
     float xSine = sin(uv.x * 8. + time);

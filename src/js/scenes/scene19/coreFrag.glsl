@@ -46,8 +46,8 @@ void main() {
 
     color *= tex1.r;
 
-    // vec3 fillColor = uColor1 * tex1.b;
-    vec3 fillColor = tex2.rgb * tex1.b;
+    vec3 fillColor = uColor1 * tex1.b;
+    // vec3 fillColor = tex2.rgb * tex1.b;
     color += fillColor;
 
     gl_FragColor = vec4(color, alpha * tex1.a);

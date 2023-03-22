@@ -43,7 +43,8 @@ class Sketch extends SketchScene {
          */
         _this.loadingManager =  new THREE.LoadingManager()
         _this.textureLoader = new THREE.TextureLoader(_this.loadingManager)
-        _this.uvTexture = _this.textureLoader.load('_assets/uv.jpg');
+        // _this.uvTexture = _this.textureLoader.load('_assets/uv.jpg');
+        _this.uvTexture = _this.textureLoader.load('_assets/uv2.png');
 
 
         /**
@@ -135,39 +136,52 @@ class Sketch extends SketchScene {
             },
         });
 
+        _this.polenGroup = new THREE.Group();
+        _this.rt1Scene.add(_this.polenGroup);
+        _this.polenGroup.rotation.z = Math.PI * 0.16;
+        _this.polenGroup.position.x = -0.35;
+        _this.polenGroup.position.y = 0.7;
+        _this.polenGroup.position.z = 0.026 * 5;
+
         _this.line1 = new Line3D({material: _this.polenMaterial, height: 1.5, radius: 0.00375,  segments: 70, radialSegments: 20});
         _this.line1._mesh.rotation.z = Math.radians(180);
-        _this.rt1Scene.add(_this.line1._mesh);
+        _this.line1._mesh.renderOrder = 14.5;
+        _this.polenGroup.add(_this.line1._mesh);
         
         _this.material2 = _this.polenMaterial.clone();
         // _this.material2.uniforms.uStrength.value = 0.8;
         _this.line2 = new Line3D({material: _this.material2, height: 1.5, radius: 0.00375,  segments: 70, radialSegments: 20});
         _this.line2._mesh.rotation.z = Math.radians(180);
-        _this.rt1Scene.add(_this.line2._mesh);
+        _this.line2._mesh.renderOrder = 14.5;
+        _this.polenGroup.add(_this.line2._mesh);
         
         _this.material3 = _this.polenMaterial.clone();
         // _this.material3.uniforms.uStrength.value = 0.6;
         _this.line3 = new Line3D({material: _this.material3, height: 1.5, radius: 0.00375,  segments: 70, radialSegments: 20});
         _this.line3._mesh.rotation.z = Math.radians(180);
-        _this.rt1Scene.add(_this.line3._mesh);
+        _this.line3._mesh.renderOrder = 14.5;
+        _this.polenGroup.add(_this.line3._mesh);
         
         _this.material4 = _this.polenMaterial.clone();
         // _this.material4.uniforms.uStrength.value = 0.4;
         _this.line4 = new Line3D({material: _this.material4, height: 1.5, radius: 0.00375,  segments: 70, radialSegments: 20});
         _this.line4._mesh.rotation.z = Math.radians(180);
-        _this.rt1Scene.add(_this.line4._mesh);
+        _this.line4._mesh.renderOrder = 14.5;
+        _this.polenGroup.add(_this.line4._mesh);
         
         _this.material5 = _this.polenMaterial.clone();
         // _this.material5.uniforms.uStrength.value = 0.2;
         _this.line5 = new Line3D({material: _this.material5, height: 1.5, radius: 0.00375,  segments: 70, radialSegments: 20});
         _this.line5._mesh.rotation.z = Math.radians(180);
-        _this.rt1Scene.add(_this.line5._mesh);
+        _this.line5._mesh.renderOrder = 14.5;
+        _this.polenGroup.add(_this.line5._mesh);
         
         _this.material6 = _this.polenMaterial.clone();
         // _this.material6.uniforms.uStrength.value = 0.2;
         _this.line6 = new Line3D({material: _this.material6, height: 1.5, radius: 0.00375,  segments: 70, radialSegments: 20});
         _this.line6._mesh.rotation.z = Math.radians(180);
-        _this.rt1Scene.add(_this.line6._mesh);
+        _this.line6._mesh.renderOrder = 14.5;
+        _this.polenGroup.add(_this.line6._mesh);
 
         /**
          * Audio controllers
@@ -330,7 +344,7 @@ class Sketch extends SketchScene {
         });
 
         const mesh = new THREE.Mesh(geometry, _this[keys.material]);
-        mesh.position.z = zPos * 10.;
+        mesh.position.z = zPos * 5.;
         _this.flowerGroup.add(mesh);
         // _this.renderOrderCount = _this.renderOrderCount ? _this.renderOrderCount + 1 : 1;
         _this.renderOrderCount = renderOrder;
