@@ -81,17 +81,17 @@ var App = {
 
         /* Visual scenes */
         await SceneController.registerMultipleScenes([
-            Scene4,
-            Scene5,
-            Scene6,
-            Scene7,
-            Scene11,
-            Scene13,
-            Scene15,
-            Scene12,
-            Scene16,
-            Scene17,
-            Scene18,
+            // Scene4,
+            // Scene5,
+            // Scene6,
+            // Scene7,
+            // Scene11,
+            // Scene13,
+            // Scene15,
+            // Scene12,
+            // Scene16,
+            // Scene17,
+            // Scene18,
             Scene19,
         ]);
 

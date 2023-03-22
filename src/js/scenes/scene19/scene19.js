@@ -1,10 +1,20 @@
 import * as THREE from 'three'
+import { SketchScene } from '../SketchScene.js'
+import { Line3D } from '../../modules/Line3D.js'
 import polenVert from './polenVertex.glsl'
 import polenFrag from './polenFragment.glsl'
 import flowerPlaneVert from './flowerPlaneVert.glsl'
 import flowerPlaneFrag from './flowerPlaneFrag.glsl'
-import { SketchScene } from '../SketchScene.js'
-import { Line3D } from '../../modules/Line3D.js'
+import talloVert from './talloVert.glsl'
+import talloFrag from './talloFrag.glsl'
+import hojaVert from './hojaVert.glsl'
+import hojaFrag from './hojaFrag.glsl'
+import petaloVert from './petaloVert.glsl'
+import petaloFrag from './petaloFrag.glsl'
+import bulboVert from './bulboVert.glsl'
+import bulboFrag from './bulboFrag.glsl'
+import coreVert from './coreVert.glsl'
+import coreFrag from './coreFrag.glsl'
 
 class Sketch extends SketchScene {
     constructor( _config = {} ) {
@@ -33,6 +43,7 @@ class Sketch extends SketchScene {
          */
         _this.loadingManager =  new THREE.LoadingManager()
         _this.textureLoader = new THREE.TextureLoader(_this.loadingManager)
+        _this.uvTexture = _this.textureLoader.load('_assets/uv.jpg');
 
 
         /**
@@ -199,26 +210,26 @@ class Sketch extends SketchScene {
          */
         // Layers
         _this.flowerLayersData = [
-            { id: 'tallo', imgSrc: 'img/daits-flower/tallo.png', width: 0.4823, scale: 1},
+            { id: 'tallo', shaderName:'tallo', imgSrc: 'img/daits-flower/tallo.png', zPos: 0, width: 0.4823, scale: 1},
 
-            { id: 'h1', imgSrc: 'img/daits-flower/h1.png', width: 1.4460, scale: 0.5428},
-            { id: 'h2', imgSrc: 'img/daits-flower/h2.png', width: 2.2062, scale: 0.5136},
-            { id: 'h3', imgSrc: 'img/daits-flower/h3.png', width: 1.3454, scale: 0.6104},
-            { id: 'h4', imgSrc: 'img/daits-flower/h4.png', width: 0.8564, scale: 0.8153},
+            { id: 'h1', shaderName:'hoja', imgSrc: 'img/daits-flower/h1.png', zPos: 0.0014, width: 1.4460, scale: 0.5428},
+            { id: 'h2', shaderName:'hoja', imgSrc: 'img/daits-flower/h2.png', zPos: 0.0013, width: 2.2062, scale: 0.5136},
+            { id: 'h3', shaderName:'hoja', imgSrc: 'img/daits-flower/h3.png', zPos: 0.0012, width: 1.3454, scale: 0.6104},
+            { id: 'h4', shaderName:'hoja', imgSrc: 'img/daits-flower/h4.png', zPos: 0.0011, width: 0.8564, scale: 0.8153},
             
-            { id: 'p1', imgSrc: 'img/daits-flower/p1.png', width: 0.7390, scale: 0.7346},
-            { id: 'p2', imgSrc: 'img/daits-flower/p2.png', width: 0.9431, scale: 0.6922},
-            { id: 'p3', imgSrc: 'img/daits-flower/p3.png', width: 1.5714, scale: 0.4026},
-            { id: 'p4', imgSrc: 'img/daits-flower/p4.png', width: 4.3928, scale: 0.1977},
-            { id: 'p5', imgSrc: 'img/daits-flower/p5.png', width: 0.6025, scale: 0.7769},
+            { id: 'p1', shaderName:'petalo', imgSrc: 'img/daits-flower/p1.png', zPos: 0.0021, width: 0.7390, scale: 0.7346},
+            { id: 'p2', shaderName:'petalo', imgSrc: 'img/daits-flower/p2.png', zPos: 0.0022, width: 0.9431, scale: 0.6922},
+            { id: 'p3', shaderName:'petalo', imgSrc: 'img/daits-flower/p3.png', zPos: 0.0024, width: 1.5714, scale: 0.4026},
+            { id: 'p4', shaderName:'petalo', imgSrc: 'img/daits-flower/p4.png', zPos: 0.0023, width: 4.3928, scale: 0.1977},
+            { id: 'p5', shaderName:'petalo', imgSrc: 'img/daits-flower/p5.png', zPos: 0.0025, width: 0.6025, scale: 0.7769},
 
-            { id: 'b1', imgSrc: 'img/daits-flower/b1.png', width: 0.9841, scale: 0.4470},
-            { id: 'b2', imgSrc: 'img/daits-flower/b2.png', width: 1.0276, scale: 0.3289},
-            { id: 'b3', imgSrc: 'img/daits-flower/b3.png', width: 0.9047, scale: 0.4238},
-            { id: 'b4', imgSrc: 'img/daits-flower/b4.png', width: 0.6004, scale: 0.4873},
-            { id: 'b5', imgSrc: 'img/daits-flower/b5.png', width: 0.6590, scale: 0.4883},
+            { id: 'b1', shaderName:'bulbo', imgSrc: 'img/daits-flower/b1.png', zPos: 0.0036, width: 0.9841, scale: 0.4470},
+            { id: 'b2', shaderName:'bulbo', imgSrc: 'img/daits-flower/b2.png', zPos: 0.0035, width: 1.0276, scale: 0.3289},
+            { id: 'b3', shaderName:'bulbo', imgSrc: 'img/daits-flower/b3.png', zPos: 0.0033, width: 0.9047, scale: 0.4238},
+            { id: 'b4', shaderName:'bulbo', imgSrc: 'img/daits-flower/b4.png', zPos: 0.0032, width: 0.6004, scale: 0.4873},
+            { id: 'b5', shaderName:'bulbo', imgSrc: 'img/daits-flower/b5.png', zPos: 0.0031, width: 0.6590, scale: 0.4883},
 
-            { id: 'core', imgSrc: 'img/daits-flower/core.png', width: 1.0833, scale: 0.1574},
+            { id: 'core', shaderName: 'core', imgSrc: 'img/daits-flower/core.png', zPos: 0.0034, width: 1.0833, scale: 0.1574},
         ];
 
         _this.flowerLayers = [];
@@ -251,7 +262,7 @@ class Sketch extends SketchScene {
         _this.flowerLayers.core.mesh.position.set(-0.03, 0.086);
     }
 
-    flowerLayer({id, imgSrc, width, scale = 1}) {
+    flowerLayer({id, shaderName, imgSrc, zPos, width, scale = 1}) {
         var _this = this;
         var keys = {
             texture: `texture_${id}Flower`,
@@ -261,29 +272,66 @@ class Sketch extends SketchScene {
         }
 
         let planeSize = new THREE.Vector2(width, 1).multiplyScalar(scale);
-        const geometry = new THREE.PlaneGeometry(planeSize.x, planeSize.y, 300, 300)
-        _this[keys.texture] = _this.textureLoader.load(imgSrc)
+        const geometry = new THREE.PlaneGeometry(planeSize.x, planeSize.y, 300, 300);
+        _this[keys.texture] = _this.textureLoader.load(imgSrc);
+        var vertexShader, fragmentShader;
+        var fillColor;
+
+        switch(shaderName) {
+            case 'tallo':
+                vertexShader = talloVert;
+                fragmentShader = talloFrag;
+                fillColor = '#08606D';
+                break;
+            case 'hoja':
+                vertexShader = hojaVert;
+                fragmentShader = hojaFrag;
+                fillColor = '#64336F';
+                break;
+            case 'petalo':
+                vertexShader = petaloVert;
+                fragmentShader = petaloFrag;
+                fillColor = '#A87B37';
+                break;
+            case 'bulbo':
+                vertexShader = bulboVert;
+                fragmentShader = bulboFrag;
+                fillColor = '#D8C9BC';
+                break;
+            case 'core':
+                vertexShader = coreVert;
+                fragmentShader = coreFrag;
+                fillColor = '#FFD97A';
+                break;
+            default:
+                console.error('Invalid Shader Name provided at flowerLayer() setup');
+        }
         
         _this[keys.material] = new THREE.ShaderMaterial({
-            vertexShader: flowerPlaneVert,
-            fragmentShader: flowerPlaneFrag,
+            vertexShader: vertexShader,
+            fragmentShader: fragmentShader,
             side: THREE.DoubleSide,
             transparent: true,
-            depthTest: false,
+            depthTest: true,
             // blending: THREE.AdditiveBlending,
             uniforms: {
                 uSize: { value: planeSize },
                 
-                uProgress: { value: 0.6 }, // MIDI hooked
-                uSignal: { value: 0.5 }, // Microphone hooked
+                uProgress: { value: 1 }, // MIDI hooked
+                uSignal: { value: 0.01 }, // Microphone hooked
                 tMap1: { value: _this[keys.texture] },
+                tMap2: { value: _this.uvTexture },
+                uColor1: { value: new THREE.Color(fillColor) },
                 
                 uAnimate: { value: 0 },
             },
         });
 
-        const mesh = new THREE.Mesh(geometry, _this[keys.material])
-        _this.flowerGroup.add(mesh)
+        const mesh = new THREE.Mesh(geometry, _this[keys.material]);
+        mesh.position.z = zPos * 10.;
+        _this.flowerGroup.add(mesh);
+        _this.renderOrderCount = _this.renderOrderCount ? _this.renderOrderCount + 1 : 1;
+        mesh.renderOrder = _this.renderOrderCount;
 
         /**
          * Audio controllers
