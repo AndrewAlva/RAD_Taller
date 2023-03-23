@@ -91,7 +91,7 @@ var App = {
             // Scene12,
             // Scene16,
             // Scene17,
-            // Scene18,
+            Scene18,
             Scene19,
         ]);
 

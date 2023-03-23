@@ -14,16 +14,25 @@ varying vec2 vUv;
 
 
 void main() {
+    // Rotation
+
+
+    // Globals
     float ratio = uSize.x / uSize.y;
     vec2 squaredUv = vec2(
         vUv.x,
-        vUv.y / ratio
+        // vUv.y / ratio
+        min(vUv.y / ratio, 1.)
     );
 
     vec2 squaredCenter = vec2(
         .5,
         .5 / ratio
     );
+
+    vec3 color;
+    float speed1 = uAnimate * 10.;
+
 
     //////// Ripples
     float rippleScale = uSignal * 100.;
@@ -34,21 +43,41 @@ void main() {
     ripples = clamp(ripples - blackGradient, 0., 1.);
 
 
-    vec3 color = vec3(ripples);
-    // vec3 color = vec3(1., 0., 0.);
-    float alpha = uProgress;
-
-    // vec4 tex1 = texture2D(tMap1, vUv).rrrr;
-    vec4 tex1 = texture2D(tMap1, vUv);
-    vec4 tex2 = texture2D(tMap2, vUv);
-    float smoothMask = smoothstep(0.7, 1., tex1.a);
+    //////// Textures
+    // vec4 mask = texture2D(tMap1, vUv).rrrr;
+    vec4 mask = texture2D(tMap1, vUv);
+    vec4 uvTexture = texture2D(tMap2, vUv);
+    float smoothMask = smoothstep(0.7, 1., mask.a);
     if (smoothMask <= 0.) discard;
 
-    color *= tex1.r;
 
-    // vec3 fillColor = uColor1 * tex1.b;
-    vec3 fillColor = tex2.rgb * tex1.b;
-    color += fillColor;
+    //////// Waving
+        // Sine variation
+        float fractUv = sin((squaredUv.y + (speed1 + 33.) * .207) * 3.) * .5 + .5;
+        fractUv *= 0.7;
+        fractUv += 0.53;
+        float sineProgression = 1. - pow(1. - squaredUv.y, 30.05);
+        sineProgression *= fractUv;
 
-    gl_FragColor = vec4(color, alpha * tex1.a);
+    float wave = sin(squaredUv.x * 5. + speed1) * .5 + .5;
+    float waveStrength = wave * 0.25;
+    waveStrength *= sineProgression;
+    wave = 1. - smoothstep(squaredCenter.y - 0.01, squaredCenter.y, squaredUv.y + waveStrength);
+
+
+    //////// Testing
+    vec3 strokeColor = vec3(ripples);
+    // vec3 strokeColor = vec3(1., 0., 0.);
+    strokeColor *= mask.r;
+
+    // vec3 fillColor = uColor1;
+    // vec3 fillColor = uvTexture.rgb;
+    // vec3 fillColor = vec3(squaredUv.y);
+    vec3 fillColor = vec3(wave);
+    fillColor *= mask.b;
+    // fillColor *= uColor1;
+    color = strokeColor + fillColor;
+
+    float alpha = uProgress;
+    gl_FragColor = vec4(color, alpha * mask.a);
 }

@@ -40,7 +40,7 @@ void main() {
 
     // vec4 tex1 = texture2D(tMap1, vUv).rrrr;
     vec4 tex1 = texture2D(tMap1, vUv);
-    vec4 tex2 = texture2D(tMap2, vUv);
+    vec4 tex2 = texture2D(tMap2, squaredUv);
     float smoothMask = smoothstep(0.7, 1., tex1.a);
     if (smoothMask <= 0.) discard;
 

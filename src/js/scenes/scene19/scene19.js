@@ -20,6 +20,7 @@ class Sketch extends SketchScene {
     constructor( _config = {} ) {
         super(_config);
         this.drumLerping = 0;
+        this.noPolen = true;
     }
 
     init() {
@@ -44,7 +45,12 @@ class Sketch extends SketchScene {
         _this.loadingManager =  new THREE.LoadingManager()
         _this.textureLoader = new THREE.TextureLoader(_this.loadingManager)
         // _this.uvTexture = _this.textureLoader.load('_assets/uv.jpg');
-        _this.uvTexture = _this.textureLoader.load('_assets/uv2.png');
+        _this.uvTexture = _this.textureLoader.load('_assets/uv2.png', function (texture) {
+            texture.wrapS = texture.wrapT = THREE.MirroredRepeatWrapping;
+            texture.offset.set( 0, 0 );
+            texture.repeat.set( 2, 2 );
+            texture.magFilter = THREE.NearestFilter
+        });
 
 
         /**
@@ -112,6 +118,7 @@ class Sketch extends SketchScene {
      * Polen
      */
     polenSetup() {
+        if (this.noPolen) return;
         var _this = this;
 
         let planeSize = new THREE.Vector2(4.778, 1);
@@ -194,6 +201,7 @@ class Sketch extends SketchScene {
     }
 
     polenDraw() {
+        if (this.noPolen) return;
         var _this = this;
 
         _this.polenMaterial.uniforms.uAnimate.value = _this.animate + 5;
@@ -254,26 +262,26 @@ class Sketch extends SketchScene {
         });
 
         // Positions
-        _this.flowerLayers.tallo.mesh.position.set(0.48, -0.6);
+        _this.flowerLayers.tallo?.mesh.position.set(0.48, -0.6);
 
-        _this.flowerLayers.h1.mesh.position.set(0.619, 0.08);
-        _this.flowerLayers.h2.mesh.position.set(-0.81, -0.1285);
-        _this.flowerLayers.h3.mesh.position.set(-0.421, -0.348);
-        _this.flowerLayers.h4.mesh.position.set(0.02, -0.52);
+        _this.flowerLayers.h1?.mesh.position.set(0.619, 0.08);
+        _this.flowerLayers.h2?.mesh.position.set(-0.81, -0.1285);
+        _this.flowerLayers.h3?.mesh.position.set(-0.421, -0.348);
+        _this.flowerLayers.h4?.mesh.position.set(0.02, -0.52);
         
-        _this.flowerLayers.p1.mesh.position.set(-0.113, 0.35);
-        _this.flowerLayers.p2.mesh.position.set(-0.288, 0.295);
-        _this.flowerLayers.p3.mesh.position.set(-0.4, 0.07);
-        _this.flowerLayers.p4.mesh.position.set(-0.166, -0.175);
-        _this.flowerLayers.p5.mesh.position.set(0.272, 0.254);
+        _this.flowerLayers.p1?.mesh.position.set(-0.113, 0.35);
+        _this.flowerLayers.p2?.mesh.position.set(-0.288, 0.295);
+        _this.flowerLayers.p3?.mesh.position.set(-0.4, 0.07);
+        _this.flowerLayers.p4?.mesh.position.set(-0.166, -0.175);
+        _this.flowerLayers.p5?.mesh.position.set(0.272, 0.254);
         
-        _this.flowerLayers.b1.mesh.position.set(0.082, 0.045);
-        _this.flowerLayers.b2.mesh.position.set(-0.182, 0.0175);
-        _this.flowerLayers.b3.mesh.position.set(-0.16, 0.15);
-        _this.flowerLayers.b4.mesh.position.set(-0.029, 0.2);
-        _this.flowerLayers.b5.mesh.position.set(0.176, 0.17);
+        _this.flowerLayers.b1?.mesh.position.set(0.082, 0.045);
+        _this.flowerLayers.b2?.mesh.position.set(-0.182, 0.0175);
+        _this.flowerLayers.b3?.mesh.position.set(-0.16, 0.15);
+        _this.flowerLayers.b4?.mesh.position.set(-0.029, 0.2);
+        _this.flowerLayers.b5?.mesh.position.set(0.176, 0.17);
         
-        _this.flowerLayers.core.mesh.position.set(-0.03, 0.086);
+        _this.flowerLayers.core?.mesh.position.set(-0.03, 0.086);
     }
 
     flowerLayer({id, shaderName, imgSrc, zPos, renderOrder, width, scale = 1}) {
@@ -287,7 +295,12 @@ class Sketch extends SketchScene {
 
         let planeSize = new THREE.Vector2(width, 1).multiplyScalar(scale);
         const geometry = new THREE.PlaneGeometry(planeSize.x, planeSize.y, 300, 300);
-        _this[keys.texture] = _this.textureLoader.load(imgSrc);
+        _this[keys.texture] = _this.textureLoader.load(imgSrc, function (texture) {
+            texture.wrapS = texture.wrapT = THREE.MirroredRepeatWrapping;
+            texture.offset.set( 0, 0 );
+            texture.repeat.set( 2, 2 );
+            texture.magFilter = THREE.NearestFilter
+        });
         var vertexShader, fragmentShader;
         var fillColor;
 
