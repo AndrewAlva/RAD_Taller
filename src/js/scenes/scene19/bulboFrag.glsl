@@ -32,6 +32,7 @@ void main() {
 
     vec3 color;
     float speed1 = uAnimate * 10.;
+    float rAnimate = speed1 - sin(speed1 * 1.131 + sin(speed1 * .5));
 
 
     //////// Ripples
@@ -53,16 +54,21 @@ void main() {
 
     //////// Waving
         // Sine variation
-        float fractUv = sin((squaredUv.y + (speed1 + 33.) * .207) * 3.) * .5 + .5;
-        fractUv *= 0.7;
-        fractUv += 0.53;
-        float sineProgression = 1. - pow(1. - squaredUv.y, 30.05);
+        float fractUv = sin((vUv.y + (speed1 + 33.) * .207) * 3.) * .5 + .5;
+        fractUv *= 1.7;
+        // fractUv += 0.53;
+        float sineProgression = 1. - pow(1. - vUv.y, 30.05);
         sineProgression *= fractUv;
 
-    float wave = sin(squaredUv.x * 5. + speed1) * .5 + .5;
+    float steps = 6.;
+    float factor = 1. / steps;
+    float wave = sin(vUv.x * 5. + speed1) * .5 + .5;
     float waveStrength = wave * 0.25;
     waveStrength *= sineProgression;
-    wave = 1. - smoothstep(squaredCenter.y - 0.01, squaredCenter.y, squaredUv.y + waveStrength);
+    // wave = 1. - smoothstep(squaredCenter.y - 0.01, squaredCenter.y, vUv.y + waveStrength);
+    wave = (vUv.y + waveStrength);
+    float steppedWave = floor(wave / factor) * 0.1;
+    wave = steppedWave;
 
 
     //////// Testing
