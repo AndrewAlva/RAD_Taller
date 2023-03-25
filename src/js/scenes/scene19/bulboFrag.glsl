@@ -32,6 +32,8 @@ void main() {
 
     vec3 color;
     float speed1 = uAnimate * 10.;
+    float speed2 = speed1 * 1.5;
+    float speed3 = speed1 * 3.;
     float rAnimate = speed1 - sin(speed1 * 1.131 + sin(speed1 * .5));
 
 
@@ -54,7 +56,7 @@ void main() {
 
     //////// Waving
         // Sine variation
-        float fractUv = sin((vUv.y + (speed1 + 33.) * .207) * 3.) * .5 + .5;
+        float fractUv = sin((vUv.y + (speed2) * .207) * 3.) * .5 + .5;
         fractUv *= 1.7;
         // fractUv += 0.53;
         float sineProgression = 1. - pow(1. - vUv.y, 30.05);
@@ -62,7 +64,7 @@ void main() {
 
     float steps = 5.;
     float factor = 1. / steps;
-    float wave = sin(vUv.x * 5. + speed1) * .5 + .5;
+    float wave = sin(vUv.x * 5. + speed2) * .5 + .5;
     float waveStrength = wave * 0.25;
     waveStrength *= sineProgression;
     // wave = 1. - smoothstep(squaredCenter.y - 0.01, squaredCenter.y, vUv.y + waveStrength);
@@ -81,7 +83,7 @@ void main() {
     // vec3 fillColor = vec3(squaredUv.y);
     vec3 fillColor = vec3(wave);
     fillColor *= mask.b;
-    // fillColor *= uColor1;
+    fillColor *= uColor1 * 1.5;
     color = strokeColor + fillColor;
 
     float alpha = uProgress;
