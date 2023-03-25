@@ -60,14 +60,14 @@ void main() {
         float sineProgression = 1. - pow(1. - vUv.y, 30.05);
         sineProgression *= fractUv;
 
-    float steps = 6.;
+    float steps = 5.;
     float factor = 1. / steps;
     float wave = sin(vUv.x * 5. + speed1) * .5 + .5;
     float waveStrength = wave * 0.25;
     waveStrength *= sineProgression;
     // wave = 1. - smoothstep(squaredCenter.y - 0.01, squaredCenter.y, vUv.y + waveStrength);
     wave = (vUv.y + waveStrength);
-    float steppedWave = floor(wave / factor) * 0.1;
+    float steppedWave = floor(wave / factor) * factor;
     wave = steppedWave;
 
 

@@ -246,12 +246,12 @@ class Sketch extends SketchScene {
             // { id: 'p5', shaderName:'petalo', imgSrc: 'img/daits-flower/p5.png', zPos: 0.018, renderOrder: 10, width: 0.6025, scale: 0.7769},
 
             { id: 'b1', shaderName:'bulbo', imgSrc: 'img/daits-flower/b1.png', zPos: 0.030, renderOrder: 16, width: 0.9841, scale: 0.4470},
-            // { id: 'b2', shaderName:'bulbo', imgSrc: 'img/daits-flower/b2.png', zPos: 0.028, renderOrder: 15, width: 1.0276, scale: 0.3289},
-            // { id: 'b3', shaderName:'bulbo', imgSrc: 'img/daits-flower/b3.png', zPos: 0.024, renderOrder: 13, width: 0.9047, scale: 0.4238},
-            // { id: 'b4', shaderName:'bulbo', imgSrc: 'img/daits-flower/b4.png', zPos: 0.022, renderOrder: 12, width: 0.6004, scale: 0.4873},
-            // { id: 'b5', shaderName:'bulbo', imgSrc: 'img/daits-flower/b5.png', zPos: 0.020, renderOrder: 11, width: 0.6590, scale: 0.4883},
+            { id: 'b2', shaderName:'bulbo', imgSrc: 'img/daits-flower/b2.png', zPos: 0.028, renderOrder: 15, width: 1.0276, scale: 0.3289},
+            { id: 'b3', shaderName:'bulbo', imgSrc: 'img/daits-flower/b3.png', zPos: 0.024, renderOrder: 13, width: 0.9047, scale: 0.4238},
+            { id: 'b4', shaderName:'bulbo', imgSrc: 'img/daits-flower/b4.png', zPos: 0.022, renderOrder: 12, width: 0.6004, scale: 0.4873},
+            { id: 'b5', shaderName:'bulbo', imgSrc: 'img/daits-flower/b5.png', zPos: 0.020, renderOrder: 11, width: 0.6590, scale: 0.4883},
 
-            // { id: 'core', shaderName: 'core', imgSrc: 'img/daits-flower/core.png', zPos: 0.026, renderOrder: 14, width: 1.0833, scale: 0.1574},
+            { id: 'core', shaderName: 'core', imgSrc: 'img/daits-flower/core.png', zPos: 0.026, renderOrder: 14, width: 1.0833, scale: 0.1574},
         ];
 
         _this.flowerLayers = [];
