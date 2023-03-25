@@ -5,12 +5,14 @@ uniform float uSignal;
 uniform sampler2D tMap1;
 uniform sampler2D tMap2;
 uniform vec3 uColor1;
+uniform float uRotation;
 
 uniform float uAnimate;
 
 varying vec2 vUv;
 
 #pragma glslify: rangeF = require('../../shaders/modules/rangeF.glsl')
+#pragma glslify: rotateUV = require('../../shaders/modules/rotateUV.glsl')
 
 
 void main() {
@@ -29,6 +31,8 @@ void main() {
         .5,
         .5 / ratio
     );
+
+    vec2 rotatedUv = rotateUV(vUv, uRotation, vec2(0.5));
 
     vec3 color;
     float speed1 = uAnimate * 10.;
@@ -56,21 +60,22 @@ void main() {
 
     //////// Waving
         // Sine variation
-        float fractUv = sin((vUv.y + (speed2) * .207) * 3.) * .5 + .5;
+        float fractUv = sin((rotatedUv.y + (speed2) * .207) * 3.) * .5 + .5;
         fractUv *= 1.7;
         // fractUv += 0.53;
-        float sineProgression = 1. - pow(1. - vUv.y, 30.05);
+        float sineProgression = 1. - pow(1. - rotatedUv.y, 30.05);
         sineProgression *= fractUv;
 
     float steps = 5.;
     float factor = 1. / steps;
-    float wave = sin(vUv.x * 5. + speed2) * .5 + .5;
+    float wave = sin(rotatedUv.x * 5. + speed2) * .5 + .5;
     float waveStrength = wave * 0.25;
     waveStrength *= sineProgression;
-    // wave = 1. - smoothstep(squaredCenter.y - 0.01, squaredCenter.y, vUv.y + waveStrength);
-    wave = (vUv.y + waveStrength);
+    // wave = 1. - smoothstep(squaredCenter.y - 0.01, squaredCenter.y, rotatedUv.y + waveStrength);
+    wave = (rotatedUv.y + waveStrength);
     float steppedWave = floor(wave / factor) * factor;
     wave = steppedWave;
+    // wave = step(0.5, rotatedUv.y);
 
 
     //////// Testing
@@ -84,6 +89,7 @@ void main() {
     vec3 fillColor = vec3(wave);
     fillColor *= mask.b;
     fillColor *= uColor1 * 1.5;
+    fillColor = clamp(fillColor, 0., 1.);
     color = strokeColor + fillColor;
 
     float alpha = uProgress;
